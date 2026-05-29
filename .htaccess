@@ -1,0 +1,32 @@
+Order Deny,Allow
+Deny from 5.0.0.0/8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+Redirect 301 /karty_uvod.html http://karty.atarot.cz/andelske-karty/popis
+Redirect 301 /karty_vestba.php http://karty.atarot.cz/andelske-karty
+Redirect 301 /karty_andelske.php http://karty.atarot.cz/andelske-karty
+Redirect 301 /karty_vyklad.php http://karty.atarot.cz/andelske-karty
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /_index.php [L]
+</IfModule>
+
+# BEGIN WordPress
+# Direktivy (řádky) mezi "BEGIN WordPress" a "END WordPress" jsou
+# dynamicky generované a měly by být upravovány pouze pomocí filtrů WordPressu.
+# Veškeré změny směrnic mezi těmito značkami budou přepsány.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
