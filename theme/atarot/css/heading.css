@@ -1,0 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+#heading { background:#532B01 url(../img/headingBg.gif) 0 0 no-repeat; color:#FDFDFD; font-size:12pt; letter-spacing:1px; margin:0px; padding:4px 0 4px 10px;}
+#heading h2, #heading h3 { font-size:13pt !important; letter-spacing:1px; margin:0px !important; padding:0px !important;}
+#heading h3 { font-weight:normal;}
+

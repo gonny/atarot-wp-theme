@@ -1,0 +1,4 @@
+@charset "utf-8";
+/* CSS Document */
+#header, #sidebar-left, .boxcaption, .box, #sidebar, #comments, #commentform,#postnavi {display:none;}
+

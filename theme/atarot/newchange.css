@@ -1,0 +1,36 @@
+html, head, body {margin:0px;
+    padding: 0px;
+}
+ul, ol, td {
+    padding: 0px;
+    margin:  0px;
+}
+
+#menus {
+    margin: 0px;
+}
+
+h1, h2, h3, h4, h5, hr {
+    margin: 0px;
+}
+p {
+    margin: 7px 5px;
+}
+.post .content ul, 
+.post .content ol {
+    padding:0 0 5px 40px !important;
+}
+.post .content ul li, 
+.post .content ol li {
+    padding: 0px;
+    margin-bottom: 3px;
+}
+.reklama {
+    text-align: center;
+    border-bottom: 1px solid #AFAFAF;
+    border-top: 1px solid #AFAFAF;
+    padding-top: 3px;
+}
+.post p {
+    margin-left: 0px;
+}
