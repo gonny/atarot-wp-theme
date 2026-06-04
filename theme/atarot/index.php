@@ -13,13 +13,12 @@
 		</div>
 	</div>
 <?php endif; ?>
-Index.php
 <?php if (have_posts()) : 
 		// $wp_query->set('orderby', 'menu_order');  
 		// $wp_query->set('order', 'ASC');  
 		// $wp_query->get_posts(); 
 ?>
-	<?php while (have_posts()) : the_post(); update_post_caches($posts); ?>
+	<?php while (have_posts()) : the_post(); ?>
 		<div class="post" id="post-<?php the_ID(); ?>">
 			<h2><a class="title" href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 			<div class="info">
@@ -34,8 +33,8 @@ Index.php
 			<div class="content">
 				<?php the_content(__('Read more...', 'inove')); ?>
 				<p class="under">
-					<?php if ($options['categories']) : ?><span class="categories"><?php the_category(', '); ?></span><?php endif; ?>
-					<?php if ($options['tags']) : ?><span class="tags"><?php the_tags('', ', ', ''); ?></span><?php endif; ?>
+					<?php if (!empty($options['categories'])) : ?><span class="categories"><?php the_category(', '); ?></span><?php endif; ?>
+					<?php if (!empty($options['tags'])) : ?><span class="tags"><?php the_tags('', ', ', ''); ?></span><?php endif; ?>
 				</p>
 				<div class="fixed"></div>
 			</div>

@@ -6,7 +6,7 @@
 <!-- heading END-->
 <!-- innerContent START-->
 <div id="innerContent">
-  <?php if ($options['notice'] && $options['notice_content']) : ?>
+  <?php if (!empty($options['notice']) && !empty($options['notice_content'])) : ?>
   <div class="post" id="notice">
     <div class="content"> <?php echo($options['notice_content']); ?>
       <div class="fixed"></div>
@@ -16,32 +16,21 @@
   <div>
     <?php
  $lastposts = get_posts('numberposts=10');
-// print_r($lastposts);
 if(!empty($lastposts))
 {
- foreach($lastposts as $post) :
-    setup_postdata($post);
+ foreach($lastposts as $lastpost) :
+    setup_postdata($GLOBALS['post'] =& $lastpost);
  ?>
  <div class="post" id="post-<?php the_ID(); ?>">
-     <h2><a class="title" href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
-			<!--<div class="info">
-				<div class="act author">
-            <? //edit_post_link(__('Edit'), '<span class="editpost">', '</span>'); ?>
-				  <?php //the_time(__('j. F  Y | H:i')); echo " - ";  the_author_posts_link();
-					//edit_post_link(__('Edit'), '<span class="editpost">', '</span>'); ?>
-				</div>
-				<div class="fixed"></div>
-			</div>-->
-         	<div class="home">
+     <h2><a class="title" href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+         <div class="home">
 				<?php the_content(__('Read more...', 'inove')); ?>
                 <div class="fixed"></div>
             </div>
-            <!--<div class="under">
-            <span class="categories"><?php //the_category(', '); ?></span>
-            </div>-->
-            
-		</div>
+        
+	</div>
     <?php endforeach; 
+    wp_reset_postdata();
 }?>
   </div>
 </div>

@@ -14,10 +14,10 @@ Template Name: karty-zobrazeni
   			<!-- innerContent START-->
         <div id="innerContent">
 
-<?php if (have_posts()) : the_post(); update_post_caches($posts); endif;?>
+<?php if (have_posts()) : the_post(); endif;?>
 
 	<div class="post" id="post-<?php the_ID(); ?>">
-<? endif; //end if ?>
+<?php endif; //end if ?>
 		<div class="content">
 		<?php
 			require(dirname(__FILE__)."/../../plugins/karty/content/card_show.php");

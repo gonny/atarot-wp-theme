@@ -12,13 +12,13 @@ Template Name: Archives
   			<!-- innerContent START-->
         <div id="innerContent">
 
-<?php if (have_posts()) : the_post(); update_post_caches($posts); ?>
+<?php if (have_posts()) : the_post(); ?>
 
 	<div class="post" id="post-<?php the_ID(); ?>">
 		<div class="info">
 			<span class="date"><?php the_modified_time(__('F jS, Y', 'inove')); ?></span>
 			<div class="act">
-				<?php if ($comments || comments_open()) : ?>
+				<?php if (get_comments_number() || comments_open()) : ?>
 					<span class="comments"><a href="#comments"><?php _e('Goto comments', 'inove'); ?></a></span>
 					<span class="addcomment"><a href="#respond"><?php _e('Leave a comment', 'inove'); ?></a></span>
 				<?php endif; ?>

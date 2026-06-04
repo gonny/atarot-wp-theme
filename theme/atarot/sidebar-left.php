@@ -3,8 +3,10 @@
 <?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('menu_sidebar') ) : ?>
 <div id="menu">
 	<?php 
+    global $wpdb;
     $categs = get_categories('orderby=order&order=ASC&hide_empty=1&hierarchical=1');
     $order = array();
+    $categories1 = array();
 	foreach($categs as $cat)
 	{
 		if($cat->category_parent == 0)

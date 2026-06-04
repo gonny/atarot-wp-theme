@@ -28,7 +28,7 @@
 	}
 	?></h1>
      </div>
- 			<!-- heading END-->
+			<!-- heading END-->
   			<!-- innerContent START-->
         <div id="innerContent">
 <?php if (have_posts()) : ?>
@@ -38,7 +38,7 @@
 //    echo '<div class="reklama gg" id="adgg"><script type="text/javascript"><!--
 //google_ad_client = "pub-7383489556823532"; /* Multiple Reading 468x60 */ google_ad_slot = "2805343663"; google_ad_width = 468; google_ad_height = 60;
 //--></script><script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
-    while (have_posts()) : the_post(); update_post_caches($posts); ?>
+    while (have_posts()) : the_post(); ?>
 		<div class="post" id="post-<?php the_ID(); ?>">
 			<h2><a class="title" href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 			<div class="home">

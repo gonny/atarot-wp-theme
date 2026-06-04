@@ -13,8 +13,13 @@
 		<?php
 			global $wpdb;
 			$post_datetimes = $wpdb->get_results("SELECT YEAR(post_date_gmt) AS year FROM $wpdb->posts WHERE post_date_gmt > 1970 ORDER BY post_date_gmt ASC");
-			$firstpost_year = $post_datetimes[0]->year;
-			$lastpost_year = $post_datetimes[count($post_datetimes)-1]->year;
+			if (!empty($post_datetimes)) {
+				$firstpost_year = $post_datetimes[0]->year;
+				$lastpost_year  = $post_datetimes[count($post_datetimes)-1]->year;
+			} else {
+				$firstpost_year = date('Y');
+				$lastpost_year  = $firstpost_year;
+			}
 
 			$copyright = __('Copyright &copy; ', 'inove') . $firstpost_year;
 			if($firstpost_year != $lastpost_year) {
