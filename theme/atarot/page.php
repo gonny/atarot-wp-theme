@@ -6,7 +6,7 @@
 <!-- heading END-->
 <!-- innerContent START-->
 <div id="innerContent">
-  <?php if (have_posts()) : the_post(); update_post_caches($posts); ?>
+  <?php if (have_posts()) : the_post(); ?>
   <div class="post page" id="post-<?php the_ID(); ?>">
     <div class="content">
       <?php the_content(); ?>
