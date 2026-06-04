@@ -7,6 +7,22 @@
 <?php return; endif; ?>
 
 <?php
+	// Kompatibilita se starou sablonou - definice legacy promennych,
+	// ktere stara WP automaticky vkladala do scope sablony.
+	$user_ID       = get_current_user_id();          // 0 kdyz neprihlasen
+	$current_user  = wp_get_current_user();
+	$user_identity = $current_user->exists() ? $current_user->display_name : '';
+
+	$commenter            = wp_get_current_commenter();
+	$comment_author       = $commenter['comment_author'];
+	$comment_author_email = $commenter['comment_author_email'];
+	$comment_author_url   = $commenter['comment_author_url'];
+
+	$req = get_option('require_name_email');
+	$id  = get_the_ID();
+?>
+
+<?php
 	$options = get_option('inove_options');
 	$all_comments = (isset($comments) && is_array($comments)) ? $comments : array();
 	$trackbacks = array();
@@ -91,7 +107,7 @@
 			<?php foreach ($trackbacks as $comment) : ?>
 				<li class="trackback">
 					<div class="date">
-						<? printf( __('%1$s at %2$s', 'inove'), get_comment_time(__('F jS, Y', 'inove')), get_comment_time(__('H:i', 'inove')) ); ?>
+						<?php printf( __('%1$s at %2$s', 'inove'), get_comment_time(__('F jS, Y', 'inove')), get_comment_time(__('H:i', 'inove')) ); ?>
 						 | <a href="#comment-<?php comment_ID() ?>"><?php printf('#%1$s', ++$trackbackcount); ?></a>
 					</div>
 					<div class="act">

@@ -57,8 +57,8 @@ document.write(\'<\'+\'iframe width="468" height="60" frameborder="0" style="wid
 				<?php _e("Author:"); echo " "; the_author_posts_link();?>
       </p><br /><br />
       <div class="boxcaption"><p class="under">
-      			<?php if ($options['categories']) : ?><span class="categories"><?php the_category(', '); ?></span><?php endif; ?>
-				<?php if ($options['tags']) : ?><span class="tags"><?php the_tags('', ', ', ''); ?></span><?php endif; ?>
+      			<?php if (!empty($options['categories'])) : ?><span class="categories"><?php the_category(', '); ?></span><?php endif; ?>
+				<?php if (!empty($options['tags'])) : ?><span class="tags"><?php the_tags('', ', ', ''); ?></span><?php endif; ?>
 		      </p><div class="fixed"></div></div>
               
 		<div class="box">
