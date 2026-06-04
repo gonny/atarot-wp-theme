@@ -1,6 +1,7 @@
 <?php
 	$options = get_option('inove_options');
 	$feed = atarot_get_feed_url();
+	$user_ID = get_current_user_id();
 ?>
 
 <!-- sidebar START -->
@@ -42,15 +43,13 @@
 		<ul>
 			<?php
 				if (is_single()) {
-					$posts = get_posts('numberposts=10&orderby=post_date');
+					$widget_posts = get_posts('numberposts=10&orderby=post_date');
 				} else {
-					$posts = get_posts('numberposts=5&orderby=rand');
+					$widget_posts = get_posts('numberposts=5&orderby=rand');
 				}
-				foreach($posts as $post) {
-					setup_postdata($post);
-					echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+				foreach ($widget_posts as $widget_post) {
+					echo '<li><a href="' . esc_url(get_permalink($widget_post->ID)) . '">' . esc_html(get_the_title($widget_post->ID)) . '</a></li>';
 				}
-				$post = $posts[0];
 			?>
 		</ul>
 	</div>

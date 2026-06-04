@@ -24,11 +24,12 @@
 		if (is_home()) { 
 			$description = $options['description'];
 		} else if (is_single()) {
-			$description = strip_tags($post->post_title);
+			$single_post = get_queried_object();
+			$description = $single_post ? wp_strip_all_tags($single_post->post_title) : '';
 		} else if (is_category()) {
 			$description = category_description();
 		} else if (is_page()) {
-			$customMeta = get_post_custom($wp_query->post->ID);
+			$customMeta = get_post_custom(get_queried_object_id());
 			$description = isset($customMeta['popis']) ? $customMeta['popis'][0] : '';
 		}
 	?>
@@ -45,7 +46,7 @@
 	<style type="text/css" media="screen">@import url( <?php bloginfo('stylesheet_url'); ?> );</style>
     <link rel="stylesheet" media="print" type="text/css" href="<?php bloginfo('stylesheet_directory'); ?>/print.css" />
 	<?php if (strtoupper(get_locale()) == 'ZH_CN') : ?><link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); ?>/css/zh_CN.css" type="text/css" media="screen" /><?php endif; ?>
-	<?php if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6')) : ?><link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); ?>/css/ie6.css" type="text/css" media="screen" /><?php endif; ?>
+	<?php if (!empty($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6')) : ?><link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); ?>/css/ie6.css" type="text/css" media="screen" /><?php endif; ?>
 
 	<!-- script -->
 	<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/util.js"></script>
