@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <?php $options = get_option('inove_options'); ?>
 			<!-- heading START -->
-  		<div id="heading"><h3><?php echo __('Search Results', 'inove')." "; printf( __('Keyword: &#8216;%1$s&#8217;', 'inove'), wp_specialchars($s, 1) );?></h3></div>
+  		<div id="heading"><h1><?php printf(__('Search results for &#8216;%1$s&#8217;', 'inove'), esc_html(get_search_query())); ?></h1></div>
   			<!-- heading END-->
   			<!-- innerContent START-->
         <div id="innerContent">

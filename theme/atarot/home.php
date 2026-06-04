@@ -2,7 +2,7 @@
 <?php $options = get_option('inove_options'); ?>
 <!-- heading START -->
 
-<div id="heading">Vítejte na magických stránkách Atarot</div>
+<div id="heading"><h2>Vítejte na magických stránkách Atarot</h2></div>
 <!-- heading END-->
 <!-- innerContent START-->
 <div id="innerContent">
@@ -46,8 +46,8 @@ if(!empty($lastposts))
   </div>
 </div>
 <!--
-http://codex.wordpress.org/Template_Hierarchy
-http://codex.wordpress.org/Category:Template_Tags
-http://codex.wordpress.org/Function_Reference
+https://codex.wordpress.org/Template_Hierarchy
+https://codex.wordpress.org/Category:Template_Tags
+https://codex.wordpress.org/Function_Reference
 -->
 <?php get_footer(); ?>

@@ -1,6 +1,6 @@
 var _ads = 
 {
-    apiUrl: 'http://10.1.4.25/%23upravarna/objectTest',
+    apiUrl: 'https://10.1.4.25/%23upravarna/objectTest',
     iframeId: '_ads_if',
 	//serviceId: !serviceId ? '' : serviceId,
     adsCount: 0,
@@ -189,7 +189,7 @@ var _ads =
             for (i = 0; activeAds.length < zoneData.nads && adHereBanner &&
                 i < ( repeatBanner ? (zoneData.nads - activeAds.length) : 1); i++, j++ )
             {
-                output += '<a href="http://buysellads.com/buy/detail/'+zoneData.siteid+'" title="Advertise Here" class="adhere ad'+j+' '+(j%2===0?'even':'odd')+'" target="_blank">Advertise Here</a>';
+                output += '<a href="https://buysellads.com/buy/detail/'+zoneData.siteid+'" title="Advertise Here" class="adhere ad'+j+' '+(j%2===0?'even':'odd')+'" target="_blank">Advertise Here</a>';
             }
         }
         else if (zoneData.type == 1)
@@ -198,7 +198,7 @@ var _ads =
             {
                 activeAds.concat({
                     id: -i,
-                    link:'http://buysellads.com',
+                    link:'https://buysellads.com',
                     title:'BuySellAds.com Online Advertising',
                     text:'Join over 1,000 high quality advertisers who advertise across 750 successful websites, and take control of your ad space!'
                 });
@@ -233,7 +233,7 @@ var _ads =
         var u = this.generateCookie('bsau',30),
             s = this.generateCookie('bsas',1/2),
             img = new Image();
-        img.src='http://test.atarot.cz/'+type+'.php?z='+zoneId+'&b='+activeIds+'&g='+u+'&s='+s+'&sw='+screen.width+'&sh='+screen.height+'&br='+this.getBrowser()+'&r='+Math.random();
+        img.src='https://test.atarot.cz/'+type+'.php?z='+zoneId+'&b='+activeIds+'&g='+u+'&s='+s+'&sw='+screen.width+'&sh='+screen.height+'&br='+this.getBrowser()+'&r='+Math.random();
     },
     getBrowser: function()
     {

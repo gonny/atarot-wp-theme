@@ -71,7 +71,7 @@ echo "</ul>"; ?>
 <!-- menu END -->
 
 <p class="center" style="display:none">
- <a href="http://www.toplist.cz/stat/241246">
+ <a href="https://www.toplist.cz/stat/241246">
                 <script type="text/javascript"><!--
 
 document.write ('<img src="https://toplist.cz/count.asp?id=241246&amp;logo=mc&amp;http='+escape(document.referrer)+'&amp;amp;wi='+escape(window.screen.width)+'&amp;he='+escape(window.screen.height)+'&amp;cd='+escape(window.screen.colorDepth)+'&amp;t='+escape(document.title)+'" width="88" height="60" border="0" alt="TOPlist" />');

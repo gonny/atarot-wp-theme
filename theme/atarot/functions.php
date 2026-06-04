@@ -161,7 +161,7 @@ class iNoveOptions {
 						<?php _e('CX:', 'inove'); ?>
 						 <input type="text" name="google_cse_cx" id="google_cse_cx" class="code" size="40" value="<?php echo($options['google_cse_cx']); ?>">
 						<br/>
-						<?php _e('Find <code>name="cx"</code> in the <strong>Search box code</strong> of <a href="http://www.google.com/coop/cse/">Google Custom Search Engine</a>, and type the <code>value</code> here.<br/>For example: <code>014782006753236413342:1ltfrybsbz4</code>', 'inove'); ?>
+						<?php _e('Find <code>name="cx"</code> in the <strong>Search box code</strong> of <a href="https://www.google.com/coop/cse/">Google Custom Search Engine</a>, and type the <code>value</code> here.<br/>For example: <code>014782006753236413342:1ltfrybsbz4</code>', 'inove'); ?>
 					</td>
 				</tr>
 			</tbody>
@@ -307,12 +307,35 @@ add_action('admin_menu', array('iNoveOptions', 'add'));
 
 function atarot_theme_setup() {
 	add_theme_support('title-tag');
+	add_theme_support('html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script'));
 	add_theme_support('yoast-seo-breadcrumbs');
 }
 add_action('after_setup_theme', 'atarot_theme_setup');
 
 function atarot_has_yoast_seo() {
 	return function_exists('yoast_breadcrumb');
+}
+
+function atarot_normalize_https_url($url) {
+	$url = trim((string) $url);
+	if ($url === '') {
+		return '';
+	}
+
+	if (!preg_match('#^https?://#i', $url)) {
+		return 'https://' . ltrim($url, '/');
+	}
+
+	return preg_replace('#^http://#i', 'https://', $url);
+}
+
+function atarot_get_feed_url() {
+	$options = get_option('inove_options');
+	if (!empty($options['feed']) && !empty($options['feed_url'])) {
+		return atarot_normalize_https_url($options['feed_url']);
+	}
+
+	return get_bloginfo('rss2_url');
 }
 
 function atarot_render_breadcrumbs() {
@@ -322,6 +345,28 @@ function atarot_render_breadcrumbs() {
 
 	yoast_breadcrumb('<div id="breadcrumbs" class="breadcrumbs">', '</div>');
 }
+
+function atarot_get_adsense_markup($slot = '6155031655', $extra_class = 'gg') {
+	return '<div class="reklama ' . esc_attr($extra_class) . '" id="ad-' . esc_attr($slot) . '"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7383489556823532" data-ad-slot="' . esc_attr($slot) . '" data-ad-format="horizontal" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>';
+}
+
+function atarot_output_adsense_loader() {
+	echo '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7383489556823532" crossorigin="anonymous"></script>';
+}
+add_action('wp_head', 'atarot_output_adsense_loader', 1);
+
+function atarot_output_analytics() {
+	?>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P2DC7FS9TX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-P2DC7FS9TX');
+</script>
+	<?php
+}
+add_action('wp_head', 'atarot_output_analytics', 2);
 
 
 /** l10n */

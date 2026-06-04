@@ -3,7 +3,7 @@
     if(isset($matches[1]) && !empty($matches[1]))
     {
         $matches = explode("/",$matches[1]);
-        header('Location: http://www.google.com/cse?q='.str_replace("-"," ",$matches[0]).'&cx=partner-pub-7383489556823532%3A3ullgkswitf&ie=UTF-8' );
+        header('Location: https://www.google.com/cse?q='.str_replace("-"," ",$matches[0]).'&cx=partner-pub-7383489556823532%3A3ullgkswitf&ie=UTF-8' );
     }
     
 ?>
@@ -11,15 +11,15 @@
 <?php $options = get_option('inove_options'); ?>
 <!-- heading START -->
 
-<div id="heading">Stránka nenalezena !!</div>
+<div id="heading"><h1>Stránka nenalezena !!</h1></div>
 <!-- heading END-->
 <!-- innerContent START-->
 <div id="innerContent">
   <div id="notice">
-    <h1>
+    <h2>
       Vámi požadovaná stránka nebyla nalezna!
       <?php //_e('Welcome to 404 error page!', 'inove'); ?>
-    </h1>
+    </h2>
 
     <p>
       <?php //_e("Welcome to this customized error page. You've reached this page because you've clicked on a link that does not exist. This is probably our fault... but instead of showing you the basic '404 Error' page that is confusing and doesn't really explain anything, we've created this page to explain what went wrong.", 'inove'); ?>

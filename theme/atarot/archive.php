@@ -2,7 +2,7 @@
 <?php $options = get_option('inove_options'); ?>
 			<!-- heading START -->
   		<div id="heading">
-      	<h3>
+      	<h1>
         	<?php
 	// If this is a category archive
 	if (is_category()) {
@@ -26,7 +26,7 @@
 	} elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {
 		_e('Blog Archives', 'inove');
 	}
-	?></h3>
+	?></h1>
      </div>
  			<!-- heading END-->
   			<!-- innerContent START-->
@@ -34,12 +34,10 @@
 <?php if (have_posts()) : ?>
     
 	<?php 
-    echo '<div class="reklama af" id="adaf"><script type="text/javascript"><!--
-    google_ad_client = "ca-pub-7383489556823532";/* 468x60, vytvořeno 10.10.09 */google_ad_slot = "6155031655";google_ad_width = 468;google_ad_height = 60;//--></script>
-    <script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
+    echo atarot_get_adsense_markup('6155031655', 'af');
 //    echo '<div class="reklama gg" id="adgg"><script type="text/javascript"><!--
 //google_ad_client = "pub-7383489556823532"; /* Multiple Reading 468x60 */ google_ad_slot = "2805343663"; google_ad_width = 468; google_ad_height = 60;
-//--></script><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
+//--></script><script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
     while (have_posts()) : the_post(); update_post_caches($posts); ?>
 		<div class="post" id="post-<?php the_ID(); ?>">
 			<h2><a class="title" href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h2>

@@ -1,7 +1,7 @@
 /*
 Author: mg12
 Update: 2008/11/27
-Author URI: http://www.neoease.com/
+Author URI: https://www.neoease.com/
 */
 (function() {
 

@@ -1,4 +1,4 @@
-  </div>
+  </main>
 	<!-- main END -->
 
 	<?php get_sidebar(); ?>
@@ -6,9 +6,9 @@
 </div>
 <!-- content END -->
 <!-- footer START -->
-<div id="footer">
+<footer id="footer">
 	<a id="gotop" href="#" onclick="MGJS.goTop();return false;"><?php _e('Top', 'inove'); ?></a>
-	<a id="powered" href="http://atarot.cz/">WordPress</a>
+	<a id="powered" href="https://atarot.cz/">WordPress</a>
 	<div id="copyright">
 		<?php
 			global $wpdb;
@@ -26,9 +26,9 @@
 		<?php bloginfo('name'); ?>
 	</div>
 	<div id="themeinfo">
-		<?php //_e('Theme by <a href="http://www.neoease.com/">mg12</a>. Valid <a href="http://validator.w3.org/check?uri=referer">XHTML 1.1</a> and <a href="http://jigsaw.w3.org/css-validator/">CSS 3</a>.', 'inove'); ?>
+		<?php //_e('Theme by <a href="https://www.neoease.com/">mg12</a>. Valid <a href="https://validator.w3.org/check?uri=referer">XHTML 1.1</a> and <a href="https://jigsaw.w3.org/css-validator/">CSS 3</a>.', 'inove'); ?>
 	</div>
-</div>
+</footer>
 <!-- footer END -->
 
 </div>
@@ -37,11 +37,5 @@
 <!-- wrap END -->
 
 <?php wp_footer(); ?>
-<script type="text/javascript">//<![CDATA[
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-//]]></script>
-<script type="text/javascript">//<![CDATA[
-var pageTracker = _gat._getTracker("UA-5145636-1"); pageTracker._initData(); pageTracker._trackPageview();
-//]]> </script>
 </body>
 </html>

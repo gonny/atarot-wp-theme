@@ -1,15 +1,6 @@
-﻿<?php
+<?php
 	$options = get_option('inove_options');
-
-	if($options['feed'] && $options['feed_url']) {
-		if (substr(strtoupper($options['feed_url']), 0, 7) == 'HTTP://') {
-			$feed = $options['feed_url'];
-		} else {
-			$feed = 'http://' . $options['feed_url'];
-		}
-	} else {
-		$feed = get_bloginfo('rss2_url');
-	}
+	$feed = atarot_get_feed_url();
 ?>
 
 <!-- sidebar START -->

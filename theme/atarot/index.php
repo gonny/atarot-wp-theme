@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <?php $options = get_option('inove_options'); ?>
 			<!-- heading START -->
-  		<div id="heading"><h1><?php the_title(); ?></h1></div>
+  		<div id="heading"><h1><?php echo is_home() && !is_front_page() ? single_post_title('', false) : __('Latest Posts', 'inove'); ?></h1></div>
   			<!-- heading END-->
   			<!-- innerContent START-->
         <div id="innerContent">

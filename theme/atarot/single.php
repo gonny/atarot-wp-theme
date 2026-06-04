@@ -2,12 +2,12 @@
 <?php $options = get_option('inove_options'); ?>
 
 			<!-- heading START -->
-  		<div id="heading"><h2><?php the_title(); ?></h2></div>
+  		<div id="heading"><h1><?php the_title(); ?></h1></div>
   			<!-- heading END-->
   			<!-- innerContent START-->
         <div id="innerContent">
         
-<?php if (have_posts()) : the_post(); update_post_caches($posts); ?>
+<?php if (have_posts()) : the_post(); ?>
 	<div id="postpath">
 		 <?php the_category(', '); ?>
 		 &gt; <?php the_title(); ?>
@@ -22,9 +22,7 @@
                     preg_match_all("@<p.*?</p>@iS", $str ,$matches);
                     $i = 4;
                     $count = 0;
-                    $adg = '<div class="reklama gg" id="adgg"><script type="text/javascript"><!--
-google_ad_client = "pub-7383489556823532"; /* Multiple Reading 468x60 */ google_ad_slot = "6155031655"; google_ad_width = 468; google_ad_height = 60;
-//--></script><script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div>';
+                    $adg = atarot_get_adsense_markup();
                     $adf = '<div class="reklama af" id="adaf"><script type="text/javascript">//<![CDATA[
 document.write(\'<\'+\'iframe width="468" height="60" frameborder="0" style="width:468;height:60;border:none" scrolling="no" src="https://ad.adfox.cz/utf/ppcbe?js=0&amp;charset=utf&amp;format=ffffffffffff3366ff00000033996658&amp;partner=6974&amp;stranka=\'+location.href+\'"><\'+\'/iframe>\'); //]]></script></div>';
                     $m = sizeof($matches[0])-1;
@@ -55,7 +53,6 @@ document.write(\'<\'+\'iframe width="468" height="60" frameborder="0" style="wid
 			?>
          <div class="fixed"></div>
       <?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
-            <g:plusone href="<?php the_permalink(); ?>" size="medium"></g:plusone>
 			<p class="act author">
 				<?php _e("Author:"); echo " "; the_author_posts_link();?>
       </p><br /><br />
