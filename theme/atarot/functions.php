@@ -35,84 +35,37 @@ class iNoveOptions {
 			$options = iNoveOptions::getOptions();
 
 			// meta
-			$options['description'] = stripslashes($_POST['description']);
-			$options['keywords'] = stripslashes($_POST['keywords']);
+			$options['description'] = stripslashes($_POST['description'] ?? '');
+			$options['keywords'] = stripslashes($_POST['keywords'] ?? '');
 
 			// google custom search engine
-			if ($_POST['google_cse']) {
-				$options['google_cse'] = (bool)true;
-			} else {
-				$options['google_cse'] = (bool)false;
-			}
-			$options['google_cse_cx'] = stripslashes($_POST['google_cse_cx']);
+			$options['google_cse'] = !empty($_POST['google_cse']);
+			$options['google_cse_cx'] = stripslashes($_POST['google_cse_cx'] ?? '');
 
 			// menu
-			$options['menu_type'] = stripslashes($_POST['menu_type']);
+			$options['menu_type'] = stripslashes($_POST['menu_type'] ?? 'pages');
 
 			// notice
-			if ($_POST['notice']) {
-				$options['notice'] = (bool)true;
-			} else {
-				$options['notice'] = (bool)false;
-			}
-			$options['notice_content'] = stripslashes($_POST['notice_content']);
+			$options['notice'] = !empty($_POST['notice']);
+			$options['notice_content'] = stripslashes($_POST['notice_content'] ?? '');
 
 			// showcase
-			if (!$_POST['showcase_registered']) {
-				$options['showcase_registered'] = (bool)false;
-			} else {
-				$options['showcase_registered'] = (bool)true;
-			}
-			if (!$_POST['showcase_commentator']) {
-				$options['showcase_commentator'] = (bool)false;
-			} else {
-				$options['showcase_commentator'] = (bool)true;
-			}
-			if (!$_POST['showcase_visitor']) {
-				$options['showcase_visitor'] = (bool)false;
-			} else {
-				$options['showcase_visitor'] = (bool)true;
-			}
-			if ($_POST['showcase_caption']) {
-				$options['showcase_caption'] = (bool)true;
-			} else {
-				$options['showcase_caption'] = (bool)false;
-			}
-			$options['showcase_title'] = stripslashes($_POST['showcase_title']);
-			$options['showcase_content'] = stripslashes($_POST['showcase_content']);
+			$options['showcase_registered'] = !empty($_POST['showcase_registered']);
+			$options['showcase_commentator'] = !empty($_POST['showcase_commentator']);
+			$options['showcase_visitor'] = !empty($_POST['showcase_visitor']);
+			$options['showcase_caption'] = !empty($_POST['showcase_caption']);
+			$options['showcase_title'] = stripslashes($_POST['showcase_title'] ?? '');
+			$options['showcase_content'] = stripslashes($_POST['showcase_content'] ?? '');
 
 			// categories & tags
-			if ($_POST['categories']) {
-				$options['categories'] = (bool)true;
-			} else {
-				$options['categories'] = (bool)false;
-			}
-			if (!$_POST['tags']) {
-				$options['tags'] = (bool)false;
-			} else {
-				$options['tags'] = (bool)true;
-			}
+			$options['categories'] = !empty($_POST['categories']);
+			$options['tags'] = !empty($_POST['tags']);
 
 			// feed
-			if ($_POST['feed']) {
-				$options['feed'] = (bool)true;
-			} else {
-				$options['feed'] = (bool)false;
-			}
-
-			// feed
-			if ($_POST['feed']) {
-				$options['feed'] = (bool)true;
-			} else {
-				$options['feed'] = (bool)false;
-			}
-			$options['feed_url'] = stripslashes($_POST['feed_url']);
-			if ($_POST['feed_email']) {
-				$options['feed_email'] = (bool)true;
-			} else {
-				$options['feed_email'] = (bool)false;
-			}
-			$options['feed_url_email'] = stripslashes($_POST['feed_url_email']);
+			$options['feed'] = !empty($_POST['feed']);
+			$options['feed_url'] = stripslashes($_POST['feed_url'] ?? '');
+			$options['feed_email'] = !empty($_POST['feed_email']);
+			$options['feed_url_email'] = stripslashes($_POST['feed_url_email'] ?? '');
 
 			update_option('inove_options', $options);
 
@@ -371,7 +324,7 @@ add_action('wp_head', 'atarot_output_analytics', 2);
 
 /** l10n */
 function theme_init(){
-	load_theme_textdomain('inove');
+	load_theme_textdomain('inove', get_template_directory() . '/languages');
 }
 add_action ('init', 'theme_init');
 
@@ -442,9 +395,12 @@ if (function_exists('wp_list_comments')) {
 	// comment count
 	add_filter('get_comments_number', 'comment_count', 0);
 	function comment_count( $commentcount ) {
-		global $id;
-		$_commnets = get_comments('post_id=' . $id);
-		$comments_by_type = &separate_comments($_commnets);
+		$post_id = get_the_ID();
+		if (!$post_id) {
+			return $commentcount;
+		}
+		$_comments = get_comments('post_id=' . $post_id);
+		$comments_by_type = separate_comments($_comments);
 		return count($comments_by_type['comment']);
 	}
 }
@@ -453,11 +409,19 @@ if (function_exists('wp_list_comments')) {
 function custom_comments($comment, $args, $depth) {
 	$GLOBALS['comment'] = $comment;
 	global $commentcount;
-	if(!$commentcount) {
+	if (empty($commentcount)) {
 		$commentcount = 0;
 	}
+
+	// E-mail autora prispevku (nahrazuje odstranenou get_the_author_email()).
+	$post_author_email = '';
+	$current_post = get_post($comment->comment_post_ID);
+	if ($current_post) {
+		$post_author_email = get_the_author_meta('user_email', $current_post->post_author);
+	}
+	$is_admin_comment = ($post_author_email && $comment->comment_author_email === $post_author_email);
 ?>
-	<li class="comment <?php if($comment->comment_author_email == get_the_author_email()) {echo 'admincomment';} else {echo 'regularcomment';} ?>" id="comment-<?php comment_ID() ?>">
+	<li class="comment <?php echo $is_admin_comment ? 'admincomment' : 'regularcomment'; ?>" id="comment-<?php comment_ID() ?>">
 		<div class="author">
 			<div class="pic">
 				<?php if (function_exists('get_avatar') && get_option('show_avatars')) { echo get_avatar($comment, 32); } ?>
@@ -481,7 +445,7 @@ function custom_comments($comment, $args, $depth) {
 
 		<div class="info">
 			<div class="date">
-				<? printf( __('%1$s at %2$s', 'inove'), get_comment_time(__('F jS, Y', 'inove')), get_comment_time(__('H:i', 'inove')) ); ?>
+				<?php printf( __('%1$s at %2$s', 'inove'), get_comment_time(__('F jS, Y', 'inove')), get_comment_time(__('H:i', 'inove')) ); ?>
 					 | <a href="#comment-<?php comment_ID() ?>"><?php printf('#%1$s', ++$commentcount); ?></a>
 			</div>
 			<div class="act">
