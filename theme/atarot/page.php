@@ -10,7 +10,7 @@
   <div class="post page" id="post-<?php the_ID(); ?>">
     <div class="content">
       <?php the_content(); ?>
-      <?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
+      <?php wp_link_pages(array('before' => '<p><strong>Strany:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
       <br />
       <div class="fixed"></div>
       <div class="messagebox">
